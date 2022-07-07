@@ -1,0 +1,19 @@
+# FROM registry.cn-hangzhou.aliyuncs.com/leo_library/node:11.6-alpine as build
+FROM harbor-test.ecoweather.cn/library/node:14.18.2-alpine as build
+WORKDIR /tmp
+COPY . .
+# 设置私有源
+RUN npm config set registry https://registry.npm.taobao.org
+RUN npm cache verify
+RUN npm cache clean -f
+# 安装指定版本
+# RUN npm config set sass_binary_site  https://npm.taobao.org/mirrors/node-sass
+# RUN npm install --registry http://nexus-pro.paas.ecoweather.cn/repository/npm-group/
+RUN npm install
+RUN npm run build
+FROM registry.cn-hangzhou.aliyuncs.com/leo_library/nginx:1.12.2
+WORKDIR /usr/share/nginx/html/app
+RUN rm -f *
+COPY --from=build /tmp/dist/ .
+# 改nginx配置
+COPY --from=build /tmp/default.conf /etc/nginx/conf.d/default.conf

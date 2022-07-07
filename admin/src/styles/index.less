@@ -1,0 +1,253 @@
+@import url('reset.css');
+@import url('ant-design-vue/lib/style/themes/default.less');
+@import url('ant-design-vue/dist/antd.less');
+@import url('//at.alicdn.com/t/font_2985033_9lhdxcgzjy7.css');
+
+body {
+  overflow: hidden;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}
+
+//地图水印
+.amap-logo {
+  display: none !important;
+  visibility: hidden !important;
+}
+//地图水印
+.amap-copyright {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+// 主题色
+.primary-color {
+  color: @primary-color;
+}
+
+// 链接色
+.link-color {
+  color: @link-color;
+}
+
+// 成功色
+.success-color {
+  color: @success-color;
+}
+
+// 警告色
+.warning-color {
+  color: @warning-color;
+}
+
+// 错误色
+.error-color {
+  color: @error-color;
+}
+
+.text-color {
+  color: @text-color;
+}
+.title-color {
+  color: @heading-color;
+}
+
+.status_tag(@color, @i) {
+  .status_tag-@{i} {
+    position: relative;
+    padding-left: 12px;
+
+    &:before {
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      transform: translate(-12px, -50%);
+      width: 7px;
+      height: 7px;
+      background: @color;
+      border-radius: 50%;
+    }
+  }
+}
+
+.status(@i) when(@i =0) {
+  .status(@i + 1);
+  .status_tag(@border-color-base, @i);
+}
+
+.status(@i) when(@i =1) {
+  .status(@i + 1);
+  .status_tag(@warning-color, @i);
+}
+
+.status(@i) when(@i =2) {
+  .status(@i + 1);
+  .status_tag(@error-color, @i);
+}
+
+.status(@i) when(@i =3) {
+  .status_tag(@success-color, @i);
+}
+
+.status(0);
+
+.font(@i) when(@i <=28) {
+  .font-@{i} {
+    font-size: @i + 0px;
+  }
+
+  .font((@i + 2));
+}
+
+.font(12);
+
+.font-bold {
+  font-weight: bold;
+}
+
+.margin(@i) when(@i <=25) {
+  .margin-t-@{i} {
+    margin-top: @i + 0px;
+  }
+
+  .margin-b-@{i} {
+    margin-bottom: @i + 0px;
+  }
+
+  .margin((@i + 5));
+}
+
+.margin(5);
+
+.margin-l-5 {
+  margin-left: 5px;
+}
+
+.margin-l-10 {
+  margin-left: 10px;
+}
+
+.margin-l-20 {
+  margin-left: 20px;
+}
+
+.margin-r-5 {
+  margin-right: 5px;
+}
+
+.margin-r-10 {
+  margin-right: 10px;
+}
+
+.margin-r-16{
+  margin-right: 16px;
+}
+
+.margin-r-20 {
+  margin-right: 20px;
+}
+
+.full-ctrl {
+  width: 100%;
+}
+
+.left-split {
+  padding-left: 10px;
+  border-left: 1px solid #f0f0f0;
+}
+
+.right-split {
+  padding-right: 10px;
+  border-right: 1px solid #f0f0f0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ant-popover {
+  .ant-popover-inner {
+    border-radius: 0;
+  }
+
+  .ant-popover-inner-content {
+    padding: 24px;
+    .ant-popover-message-title {
+      padding-left: 0;
+    }
+  }
+}
+//tab文字色修改
+.ant-tabs {
+  .ant-tabs-nav {
+    .ant-tabs-nav-wrap {
+      .ant-tabs-nav-list {
+        .ant-tabs-tab-active {
+          .ant-tabs-tab-btn {
+            color: @tab-text-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+//修改表格禁止选择背景色
+.ant-table-cell {
+  .ant-checkbox-wrapper {
+    .ant-checkbox-disabled {
+      .ant-checkbox-inner {
+        background-color: #eee;
+      }
+    }
+  }
+}
+//选中树节点样式
+.ant-tree-list {
+  .ant-tree-list-holder {
+    .ant-tree-list-holder-inner {
+      .ant-tree-treenode-selected {
+        .ant-tree-node-selected {
+          font-weight: bolder;
+          background-color: transparent;
+          color: rgba(66, 166, 106, 1);
+        }
+      }
+    }
+  }
+}
+
+@scrollBarWidth: 10px;
+
+* {
+  //   //   // 针对firefox
+  scrollbar-width: @scrollBarWidth;
+}
+
+::-webkit-scrollbar {
+  width: @scrollBarWidth;
+  height: @scrollBarWidth;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #eee;
+  -webkit-border-radius: @scrollBarWidth;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: @scrollBarWidth;
+  -webkit-border-radius: @scrollBarWidth;
+  background-color: rgba(125, 125, 125, 0.7);
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: @scrollBarWidth;
+  background-color: rgba(125, 125, 125, 0.7);
+}
+
